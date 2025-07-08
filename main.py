@@ -1,7 +1,7 @@
 import os
 import discord
 from discord.ext import commands
-from keep import keep_alive  # keep.py を別ファイルで作ってある前提
+from keep_alive import keep_alive  # keep.py を別ファイルで作ってある前提
 
 
 # --- 環境変数からトークン読み込み ---
