@@ -19,10 +19,6 @@ SELF_INTRO_CHANNEL_ID = 1391324224823492702  # 実際のチャンネルID
 ROLE_ID = 1391332661087174778  # ロールID（int型）
 
 @bot.event
-async def on_ready():
-    print(f"✅ ログイン完了: {bot.user}")
-
-@bot.event
 async def on_message(message):
     if message.author.bot:
         return
@@ -31,12 +27,17 @@ async def on_message(message):
         guild = message.guild
         role = discord.utils.get(guild.roles, id=ROLE_ID)
         if role:
-            await message.author.add_roles(role)
-            await message.channel.send(f"{message.author.mention} さんにロール「{role.name}」を付与しました！")
+            # すでにロール持ってるか確認
+            if role not in message.author.roles:
+                await message.author.add_roles(role)
+                await message.channel.send(f"{message.author.mention} さんにロール「{role.name}」を付与しました！")
+            else:
+                print(f"{message.author} はすでにロールを持っています。")
         else:
             await message.channel.send("❌ ロールが見つかりませんでした。")
 
     await bot.process_commands(message)
+
 
 # --- 起動 ---
 keep_alive()
