@@ -31,7 +31,7 @@ async def on_message(message):
                 await message.author.add_roles(role)
                 await message.channel.send(
                     f"{message.author.mention} さんにロール「{role.name}」を付与しました！\n"
-                    "続けて、[最高ランク](https://discordapp.com/channels/1390595136093687901/1395760970630172742) で "
+                    "続けて、APEXプレイヤーの方は[最高ランク](https://discordapp.com/channels/1390595136093687901/1395760970630172742) で "
                     "自分の最高ランクのスタンプを押してください！"
                 )
             else:
