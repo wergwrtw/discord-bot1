@@ -23,20 +23,24 @@ async def on_message(message):
     if message.author.bot:
         return
 
-    if message.channel.id == SELF_INTRO_CHANNEL_ID:
-        guild = message.guild
-        role = discord.utils.get(guild.roles, id=ROLE_ID)
-        if role:
-            # すでにロール持ってるか確認
-            if role not in message.author.roles:
-                await message.author.add_roles(role)
-                await message.channel.send(f"{message.author.mention} さんにロール「{role.name}」を付与しました！")
-            else:
-                print(f"{message.author} はすでにロールを持っています。")
+   if message.channel.id == SELF_INTRO_CHANNEL_ID:
+    guild = message.guild
+    role = discord.utils.get(guild.roles, id=ROLE_ID)
+    if role:
+        # すでにロール持ってるか確認
+        if role not in message.author.roles:
+            await message.author.add_roles(role)
+            await message.channel.send(
+                f"{message.author.mention} さんにロール「{role.name}」を付与しました！\n"
+                "続けて、[最高ランク](https://discordapp.com/channels/1390595136093687901/1395760970630172742) で "
+                "自分の最高ランクのスタンプを押してください！"
+            )
         else:
-            await message.channel.send("❌ ロールが見つかりませんでした。")
+            print(f"{message.author} はすでにロールを持っています。")
+    else:
+        await message.channel.send("❌ ロールが見つかりませんでした。")
 
-    await bot.process_commands(message)
+await bot.process_commands(message)
 
 
 # --- 起動 ---
